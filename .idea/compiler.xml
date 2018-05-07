@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="wsLearning--" />
+        <module name="wsLearning" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="wsLearning--" target="1.5" />
+      <module name="wsLearning" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
