@@ -52,14 +52,35 @@ pom.xml dependency
     </build>
 
 Create the database
-Go to the terminal (command Prompt cmd in Microsoft Windows). Open MySQL client with a user that can create new users.
 
-For example: On a Linux, use the command
+create database EmployeePortal;
 
-$ sudo mysql --password
-This connects to MySQL as a root, this is not the recommended way for a production server.
-Create a new database
 
-mysql> create database db_example; -- Create the new database
-mysql> create user 'springuser'@'localhost' identified by 'ThePassword'; -- Creates the user
-mysql> grant all on db_example.* to 'springuser'@'localhost'; -- Gives all the privileges to the new user on the newly created database
+use EmployeePortal;
+CREATE TABLE IF NOT EXISTS EmployeeInfo(
+ id VARCHAR(200), dept varchar(20),
+ name VARCHAR(100) NOT NULL,
+ age INT NOT NULL,
+ PRIMARY KEY(id));
+
+use EmployeePortal;
+CREATE TABLE IF NOT EXISTS EmployeeWorkInfo(
+ id VARCHAR(200), dept varchar(20),
+ departName VARCHAR(100) NOT NULL,
+ departFunction VARCHAR(100) NOT NULL,
+ PRIMARY KEY(id));
+
+use EmployeePortal;
+CREATE TABLE IF NOT EXISTS EmployeeWorkProjects(
+ id VARCHAR(200), dept varchar(20),
+ employeeName VARCHAR(100) NOT NULL
+ projectName VARCHAR(100) NOT NULL
+ PRIMARY KEY(id));
+
+
+ -- Creates the user
+create user 'springuser'@'localhost' identified by 'ThePassword';
+
+-- Gives all the privileges to the new user on the newly created database
+
+mysql> grant all on EmployeePortal.* to 'springuser'@'localhost';
