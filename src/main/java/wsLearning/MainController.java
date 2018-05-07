@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller    // This means that this class is a Controller
-@RequestMapping(path = "/employeeInfo") // This means URL's start with /employeeInfo (after Application path)
+@RequestMapping(path = "/employee") // This means URL's start with /employee (after Application path)
 public class MainController {
 
     @Autowired // This means to get the bean called userRepository
