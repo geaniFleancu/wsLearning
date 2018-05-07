@@ -3,7 +3,7 @@ create database EmployeePortal;
 
 use EmployeePortal;
 CREATE TABLE IF NOT EXISTS EmployeeInfo(
- id VARCHAR(200),
+ id VARCHAR(200) AUTO_INCREMENT,
  dept varchar(20),
  name VARCHAR(100) NOT NULL,
  age INT NOT NULL,
