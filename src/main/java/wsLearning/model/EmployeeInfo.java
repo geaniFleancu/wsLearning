@@ -1,17 +1,14 @@
 package wsLearning.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "employeeinfo")
 public class EmployeeInfo {
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@Column(name = "id")
     private Integer id;
 
     @Column(name = "name")
@@ -51,5 +48,15 @@ public class EmployeeInfo {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age='" + age + '\'' +
+                '}';
     }
 }
