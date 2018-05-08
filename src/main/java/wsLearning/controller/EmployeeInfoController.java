@@ -38,7 +38,7 @@ public class EmployeeInfoController {
     }
 
     @GetMapping(value = "/getEmployee/{employeeId}")
-    public Object greeting(@PathVariable(value = "employeeId") Long employeeId,
+    public Object greeting(@PathVariable(value = "employeeId") Integer employeeId,
                            HttpServletRequest request,
                            HttpServletResponse response) {
         Optional<EmployeeInfo> employeeOpt = employeeService.getEmployee(employeeId);
@@ -52,7 +52,7 @@ public class EmployeeInfoController {
 
 
     @DeleteMapping(value = "/deleteEmployee/{employeeId}")
-    public void deleteEmployee(@PathVariable(name = "employeeId") Long employeeId) {
+    public void deleteEmployee(@PathVariable(name = "employeeId") Integer employeeId) {
         employeeService.deleteEmployee(employeeId);
     }
 }

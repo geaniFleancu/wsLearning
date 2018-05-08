@@ -8,17 +8,19 @@ import wsLearning.model.EmployeeInfo;
 import wsLearning.model.Requests.EmployeeInfoCreateRequest;
 import wsLearning.repository.EmployeeInfoRepository;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class EmployeeService {
 
     @Autowired
     private EmployeeInfoRepository employeeInfoRepository;
 
-    public Optional<EmployeeInfo> getEmployee(Long employeeId) {
+    public Optional<EmployeeInfo> getEmployee(Integer employeeId) {
         return employeeInfoRepository.findById(employeeId);
     }
 
@@ -35,9 +37,9 @@ public class EmployeeService {
     }
 
 
-    public void deleteEmployee(Long employeeId) {
-        Optional<EmployeeInfo> client = getEmployee(employeeId);
-        if (!client.isPresent()) {
+    public void deleteEmployee(Integer employeeId) {
+        Optional<EmployeeInfo> employee = getEmployee(employeeId);
+        if (!employee.isPresent()) {
             throw new BadRequestException("employee.not.found");
         }
         employeeInfoRepository.deleteById(employeeId);

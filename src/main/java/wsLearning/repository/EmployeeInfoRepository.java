@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import wsLearning.model.EmployeeInfo;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmployeeInfoRepository extends CrudRepository<EmployeeInfo, Long> {
@@ -15,5 +16,7 @@ public interface EmployeeInfoRepository extends CrudRepository<EmployeeInfo, Lon
 
     List<EmployeeInfo> findByEmployeeEmail(String employeeEmail);
 
+    Optional<EmployeeInfo> findById(Integer employeeId);
 
+    void deleteById(Integer employeeId);
 }
