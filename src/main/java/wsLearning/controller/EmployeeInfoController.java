@@ -1,8 +1,10 @@
-package wsLearning;
+package wsLearning.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import wsLearning.model.EmployeeInfo;
+import wsLearning.repository.EmployeeInfoRepository;
 
 @Controller    // This means that this class is a Controller
 @RequestMapping(path = "/employee") // This means URL's start with /employee (after Application path)

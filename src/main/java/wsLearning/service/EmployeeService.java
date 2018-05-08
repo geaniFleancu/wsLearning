@@ -1,4 +1,4 @@
-package wsLearning;
+package wsLearning.service;
 
 import org.springframework.stereotype.Service;
 

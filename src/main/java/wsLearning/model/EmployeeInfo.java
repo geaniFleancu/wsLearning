@@ -1,4 +1,4 @@
-package wsLearning;
+package wsLearning.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
