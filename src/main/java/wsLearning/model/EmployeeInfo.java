@@ -12,11 +12,12 @@ public class EmployeeInfo {
     private Integer id;
 
     @Column(name = "name")
-    private String name;
+    private String employeeName;
     @Column(name = "age")
-    private Integer age;
+    private Integer employeeAge;
     @Column(name = "email")
-    private String email;
+    private String employeeEmail;
+
 
     public Integer getId() {
         return id;
@@ -26,37 +27,38 @@ public class EmployeeInfo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getEmployeeEmail() {
+        return employeeEmail;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setEmployeeEmail(String employeeEmail) {
+        this.employeeEmail = employeeEmail;
     }
 
-    public String getEmail() {
-        return email;
+    public Integer getEmployeeAge() {
+        return employeeAge;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmployeeAge(Integer employeeAge) {
+        this.employeeAge = employeeAge;
     }
+
 
     @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", age='" + age + '\'' +
+                ", employeeName='" + employeeName + '\'' +
+                ", employeeEmail='" + employeeEmail + '\'' +
+                ", employeeAge='" + employeeAge + '\'' +
                 '}';
     }
 }

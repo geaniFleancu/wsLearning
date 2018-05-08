@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import wsLearning.exception.BadRequestException;
-import wsLearning.model.ErrorResponseEntity;
-
+import wsLearning.model.Requests.ErrorResponseEntity;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = { BadRequestException.class })
+    @ExceptionHandler(value = {BadRequestException.class})
     protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
         return handleExceptionInternal(ex, new ErrorResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST.value()),
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);

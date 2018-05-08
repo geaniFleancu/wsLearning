@@ -1,17 +1,20 @@
 package wsLearning.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import wsLearning.exception.BadRequestException;
 import wsLearning.model.EmployeeInfo;
-import wsLearning.model.EmployeeInfo_CreateRequest;
+import wsLearning.model.Requests.EmployeeInfoCreateRequest;
 import wsLearning.repository.EmployeeInfoRepository;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class EmployeeService {
+
     @Autowired
     private EmployeeInfoRepository employeeInfoRepository;
 
@@ -23,11 +26,11 @@ public class EmployeeService {
         return (List<EmployeeInfo>) employeeInfoRepository.findAll();
     }
 
-    public EmployeeInfo createEmployee(EmployeeInfo_CreateRequest createEmployeeRequest) {
+    public EmployeeInfo createEmployee(EmployeeInfoCreateRequest createEmployeeRequest) {
         EmployeeInfo employee = new EmployeeInfo();
-        employee.setName(createEmployeeRequest.getName());
-        employee.setEmail(createEmployeeRequest.getEmail());
-        employee.setAge(createEmployeeRequest.getAge());
+        employee.setEmployeeName(createEmployeeRequest.getName());
+        employee.setEmployeeEmail(createEmployeeRequest.getEmail());
+        employee.setEmployeeAge(createEmployeeRequest.getAge());
         return employeeInfoRepository.save(employee);
     }
 
@@ -42,7 +45,7 @@ public class EmployeeService {
 
     public List<EmployeeInfo> getAllEmployees(String employeeName, String employeeEmail) {
         if (!StringUtils.isEmpty(employeeName) && !StringUtils.isEmpty(employeeEmail)) {
-            return employeeInfoRepository.findByEmployeeNameAndEmail(employeeName, employeeEmail);
+            return employeeInfoRepository.findByEmployeeNameAndEmployeeEmail(employeeName, employeeEmail);
         } else if (!StringUtils.isEmpty(employeeName)) {
             return employeeInfoRepository.findByEmployeeName(employeeName);
         } else if (!StringUtils.isEmpty(employeeEmail)) {

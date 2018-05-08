@@ -1,16 +1,15 @@
 package wsLearning.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import wsLearning.model.EmployeeInfo;
 
 import java.util.List;
 
-// This will be AUTO IMPLEMENTED by Spring into a Bean called employeeInfoRepository
-// CRUD refers Create, Read, Update, Delete
-
+@Repository
 public interface EmployeeInfoRepository extends CrudRepository<EmployeeInfo, Long> {
 
-    List<EmployeeInfo> findByEmployeeNameAndEmail(String employeeName, String employeeEmail);
+    List<EmployeeInfo> findByEmployeeNameAndEmployeeEmail(String employeeName, String employeeEmail);
 
     List<EmployeeInfo> findByEmployeeName(String employeeName);
 

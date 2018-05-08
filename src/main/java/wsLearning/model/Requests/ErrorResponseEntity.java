@@ -1,4 +1,4 @@
-package wsLearning.model;
+package wsLearning.model.Requests;
 
 public class ErrorResponseEntity {
 
