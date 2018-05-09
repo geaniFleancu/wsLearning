@@ -38,7 +38,7 @@ public class EmployeeInfoController {
     }
 
     @GetMapping(value = "/getEmployee/{employeeId}")
-    public Object greeting(@PathVariable(value = "employeeId") Integer employeeId,
+    public Object employee(@PathVariable(value = "employeeId") Integer employeeId,
                            HttpServletRequest request,
                            HttpServletResponse response) {
         Optional<EmployeeInfo> employeeOpt = employeeService.getEmployee(employeeId);
