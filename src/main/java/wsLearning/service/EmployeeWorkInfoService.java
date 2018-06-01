@@ -40,7 +40,7 @@ public class EmployeeWorkInfoService {
     public void deleteEmployeeWorkInfo(Integer employeeId) {
         Optional<EmployeeWorkInfo> employee = getEmployeeWorkInfo(employeeId);
         if (!employee.isPresent()) {
-            throw new BadRequestException("employee.not.found");
+            throw new BadRequestException("employeeWorkInfo.not.found");
         }
         employeeWorkInfoRepository.deleteById(employeeId);
     }
