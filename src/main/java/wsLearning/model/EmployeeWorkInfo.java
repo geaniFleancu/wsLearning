@@ -3,20 +3,21 @@ package wsLearning.model;
 import javax.persistence.*;
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name = "employeeinfo")
-public class EmployeeInfo {
+@Table(name = "employeeworkinfo")
+
+public class EmployeeWorkInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     //@Column(name = "id")
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "employeeName")
     private String employeeName;
-    @Column(name = "age")
-    private Integer employeeAge;
-    @Column(name = "email")
-    private String employeeEmail;
+    @Column(name = "departName")
+    private String employeeDepart;
+    @Column(name = "departFunction")
+    private String employeeFunction;
 
 
     public Integer getId() {
@@ -35,30 +36,31 @@ public class EmployeeInfo {
         this.employeeName = employeeName;
     }
 
-    public String getEmployeeEmail() {
-        return employeeEmail;
+    public String getEmployeeFunction() {
+        return employeeFunction;
     }
 
-    public void setEmployeeEmail(String employeeEmail) {
-        this.employeeEmail = employeeEmail;
+    public void setEmployeeFunction(String employeeFunction) {
+        this.employeeFunction = employeeFunction;
     }
 
-    public Integer getEmployeeAge() {
-        return employeeAge;
+    public String getEmployeeDepart() {
+        return employeeDepart;
     }
 
-    public void setEmployeeAge(Integer employeeAge) {
-        this.employeeAge = employeeAge;
+    public void setEmployeeDepart(String employeeDepart) {
+        this.employeeDepart = employeeDepart;
     }
 
-/*
-    @Override
+
+/*    @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
                 ", employeeName='" + employeeName + '\'' +
-                ", employeeEmail='" + employeeEmail + '\'' +
-                ", employeeAge='" + employeeAge + '\'' +
+                ", employeeFunction='" + employeeFunction + '\'' +
+                ", employeeDepart='" + employeeDepart + '\'' +
                 '}';
     }*/
 }
+
