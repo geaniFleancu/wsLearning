@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import wsLearning.exception.BadRequestException;
-import wsLearning.model.EmployeeInfo;
-import wsLearning.model.EmployeeWorkInfo;
-import wsLearning.model.Requests.EmployeeInfoCreateRequest;
-import wsLearning.model.Requests.EmployeeInfoUpdateRequest;
-import wsLearning.repository.EmployeeInfoRepository;
+import wsLearning.model.Employee;
+import wsLearning.model.Requests.EmployeeAllCreateRequest;
+import wsLearning.model.Requests.EmployeeAllUpdateRequest;
+import wsLearning.repository.EmployeeRepository;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
@@ -20,60 +19,63 @@ import java.util.Optional;
 public class EmployeeService {
 
     @Autowired
-    private EmployeeInfoRepository employeeInfoRepository;
+    private EmployeeRepository employeeRepository;
 
-    public Optional<EmployeeInfo> getEmployee(Integer employeeId) {
-        return employeeInfoRepository.findById(employeeId);
+    public Optional<Employee> getEmployee(Integer employeeId) {
+        return employeeRepository.findById(employeeId);
     }
 
-    public List<EmployeeInfo> getAllEmployees() {
-        return (List<EmployeeInfo>) employeeInfoRepository.findAll();
+    public List<Employee> getAllEmployees() {
+        return (List<Employee>) employeeRepository.findAll();
     }
 
-    public EmployeeInfo createEmployee(EmployeeInfoCreateRequest createEmployeeRequest) {
-        Optional<EmployeeInfo> employeeId = getEmployee(createEmployeeRequest.getId());
-        Optional<EmployeeInfo> employeeName = employeeInfoRepository.searchWithNativeQuery(createEmployeeRequest.getName()).stream().findFirst();
-        if (employeeId.isPresent()) {
-            throw new BadRequestException("employee.id.already.exists: " + getEmployee(createEmployeeRequest.getId()).toString());
-        } else if (employeeName.isPresent()) {
-            throw new BadRequestException("employee.name.already.exists: " + employeeInfoRepository.searchWithNativeQuery(createEmployeeRequest.getName()).toString());
-        } else {
-        EmployeeInfo employee = new EmployeeInfo();
+    public Employee createEmployee(EmployeeAllCreateRequest createEmployeeRequest) {
+
+
+        Employee employee = new Employee();
+        employee.setId(createEmployeeRequest.getId());
         employee.setEmployeeName(createEmployeeRequest.getName());
         employee.setEmployeeEmail(createEmployeeRequest.getEmail());
         employee.setEmployeeAge(createEmployeeRequest.getAge());
-        return employeeInfoRepository.save(employee);}
+        employee.setEmployeeFunction(createEmployeeRequest.getFunction());
+        employee.setEmployeeDepart(createEmployeeRequest.getDepart());
+        employee.setEmployeeProject(createEmployeeRequest.getProject());
+        return employee;
+
     }
 
-    public EmployeeInfo updateEmployee(EmployeeInfoUpdateRequest updateEmployeeRequest) {
-        Optional<EmployeeInfo> employeeId = getEmployee(updateEmployeeRequest.getId());
+    public Employee updateEmployee(EmployeeAllUpdateRequest updateEmployeeRequest) {
+        Optional<Employee> employeeId = getEmployee(updateEmployeeRequest.getId());
         if (!employeeId.isPresent()) {
             throw new BadRequestException("employee.not.found");
         }
-        EmployeeInfo employee = new EmployeeInfo();
+        Employee employee = new Employee();
         employee.setId(updateEmployeeRequest.getId());
         employee.setEmployeeName(updateEmployeeRequest.getName());
         employee.setEmployeeEmail(updateEmployeeRequest.getEmail());
         employee.setEmployeeAge(updateEmployeeRequest.getAge());
-        return employeeInfoRepository.save(employee);
+        employee.setEmployeeFunction(updateEmployeeRequest.getFunction());
+        employee.setEmployeeDepart(updateEmployeeRequest.getDepart());
+        employee.setEmployeeProject(updateEmployeeRequest.getProject());
+        return employeeRepository.save(employee);
     }
 
 
     public void deleteEmployee(Integer employeeId) {
-        Optional<EmployeeInfo> employee = getEmployee(employeeId);
+        Optional<Employee> employee = getEmployee(employeeId);
         if (!employee.isPresent()) {
             throw new BadRequestException("employee.not.found");
         }
-        employeeInfoRepository.deleteById(employeeId);
+        employeeRepository.deleteById(employeeId);
     }
 
-    public List<EmployeeInfo> getAllEmployees(String employeeName, String employeeEmail) {
+    public List<Employee> getAllEmployees(String employeeName, String employeeEmail) {
         if (!StringUtils.isEmpty(employeeName) && !StringUtils.isEmpty(employeeEmail)) {
-            return employeeInfoRepository.findByEmployeeNameAndEmployeeEmail(employeeName, employeeEmail);
+            return employeeRepository.findByEmployeeNameAndEmployeeEmail(employeeName, employeeEmail);
         } else if (!StringUtils.isEmpty(employeeName)) {
-            return employeeInfoRepository.searchWithNativeQuery(employeeName);
+            return employeeRepository.searchWithNativeQuery(employeeName);
         } else if (!StringUtils.isEmpty(employeeEmail)) {
-            return employeeInfoRepository.findByEmployeeEmail(employeeEmail);
+            return employeeRepository.findByEmployeeEmail(employeeEmail);
         }
         return Collections.emptyList();
     }
