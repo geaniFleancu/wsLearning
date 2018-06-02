@@ -30,13 +30,12 @@ public class EmployeeWorkInfoService {
     }
 
     public EmployeeWorkInfo createEmployeeWorkInfo(EmployeeWorkInfoCreateRequest createEmployeeWorkInfoRequest) {
-        String requestName = createEmployeeWorkInfoRequest.getName();
         Optional<EmployeeWorkInfo> employeeId = getEmployeeWorkInfo(createEmployeeWorkInfoRequest.getId());
-        Optional<EmployeeWorkInfo> employeeName = employeeWorkInfoRepository.searchWithNativeQuery(requestName).stream().findFirst();
+        Optional<EmployeeWorkInfo> employeeName = employeeWorkInfoRepository.searchWithNativeQuery(createEmployeeWorkInfoRequest.getName()).stream().findFirst();
         if (employeeId.isPresent()) {
             throw new BadRequestException("employeeWorkInfo.id.already.exists: " + getEmployeeWorkInfo(createEmployeeWorkInfoRequest.getId()).toString());
         } else if (employeeName.isPresent()) {
-            throw new BadRequestException("employeeWorkInfo.name.already.exists: " + employeeWorkInfoRepository.searchWithNativeQuery(requestName).toString());
+            throw new BadRequestException("employeeWorkInfo.name.already.exists: " + employeeWorkInfoRepository.searchWithNativeQuery(createEmployeeWorkInfoRequest.getName()).toString());
         } else {
             EmployeeWorkInfo employee = new EmployeeWorkInfo();
             employee.setEmployeeName(createEmployeeWorkInfoRequest.getName());

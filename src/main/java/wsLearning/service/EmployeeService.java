@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import wsLearning.exception.BadRequestException;
 import wsLearning.model.EmployeeInfo;
+import wsLearning.model.EmployeeWorkInfo;
 import wsLearning.model.Requests.EmployeeInfoCreateRequest;
 import wsLearning.model.Requests.EmployeeInfoUpdateRequest;
 import wsLearning.repository.EmployeeInfoRepository;
@@ -30,11 +31,18 @@ public class EmployeeService {
     }
 
     public EmployeeInfo createEmployee(EmployeeInfoCreateRequest createEmployeeRequest) {
+        Optional<EmployeeInfo> employeeId = getEmployee(createEmployeeRequest.getId());
+        Optional<EmployeeInfo> employeeName = employeeInfoRepository.searchWithNativeQuery(createEmployeeRequest.getName()).stream().findFirst();
+        if (employeeId.isPresent()) {
+            throw new BadRequestException("employee.id.already.exists: " + getEmployee(createEmployeeRequest.getId()).toString());
+        } else if (employeeName.isPresent()) {
+            throw new BadRequestException("employee.name.already.exists: " + employeeInfoRepository.searchWithNativeQuery(createEmployeeRequest.getName()).toString());
+        } else {
         EmployeeInfo employee = new EmployeeInfo();
         employee.setEmployeeName(createEmployeeRequest.getName());
         employee.setEmployeeEmail(createEmployeeRequest.getEmail());
         employee.setEmployeeAge(createEmployeeRequest.getAge());
-        return employeeInfoRepository.save(employee);
+        return employeeInfoRepository.save(employee);}
     }
 
     public EmployeeInfo updateEmployee(EmployeeInfoUpdateRequest updateEmployeeRequest) {

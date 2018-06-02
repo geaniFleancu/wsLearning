@@ -2,11 +2,21 @@ package wsLearning.model.Requests;
 
 public class EmployeeInfoCreateRequest {
 
+    private int employeeId;
+
     private String employeeName;
 
     private Integer employeeAge;
 
     private String employeeEmail;
+
+    public int getId() {
+        return employeeId;
+    }
+
+    public void setId(int employeeId) {
+        this.employeeId = employeeId;
+    }
 
     public String getName() {
         return employeeName;
