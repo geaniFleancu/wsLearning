@@ -51,7 +51,7 @@ public class EmployeeInfo {
         this.employeeAge = employeeAge;
     }
 
-/*
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -60,5 +60,5 @@ public class EmployeeInfo {
                 ", employeeEmail='" + employeeEmail + '\'' +
                 ", employeeAge='" + employeeAge + '\'' +
                 '}';
-    }*/
+    }
 }

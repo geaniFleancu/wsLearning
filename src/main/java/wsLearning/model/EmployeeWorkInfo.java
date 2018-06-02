@@ -53,7 +53,7 @@ public class EmployeeWorkInfo {
     }
 
 
-/*    @Override
+    @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
@@ -61,6 +61,6 @@ public class EmployeeWorkInfo {
                 ", employeeFunction='" + employeeFunction + '\'' +
                 ", employeeDepart='" + employeeDepart + '\'' +
                 '}';
-    }*/
+    }
 }
 

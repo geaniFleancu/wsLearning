@@ -30,11 +30,20 @@ public class EmployeeWorkInfoService {
     }
 
     public EmployeeWorkInfo createEmployeeWorkInfo(EmployeeWorkInfoCreateRequest createEmployeeWorkInfoRequest) {
-        EmployeeWorkInfo employee = new EmployeeWorkInfo();
-        employee.setEmployeeName(createEmployeeWorkInfoRequest.getName());
-        employee.setEmployeeFunction(createEmployeeWorkInfoRequest.getFunction());
-        employee.setEmployeeDepart(createEmployeeWorkInfoRequest.getDepart());
-        return employeeWorkInfoRepository.save(employee);
+        String requestName = createEmployeeWorkInfoRequest.getName();
+        Optional<EmployeeWorkInfo> employeeId = getEmployeeWorkInfo(createEmployeeWorkInfoRequest.getId());
+        Optional<EmployeeWorkInfo> employeeName = employeeWorkInfoRepository.searchWithNativeQuery(requestName).stream().findFirst();
+        if (employeeId.isPresent()) {
+            throw new BadRequestException("employeeWorkInfo.id.already.exists: " + getEmployeeWorkInfo(createEmployeeWorkInfoRequest.getId()).toString());
+        } else if (employeeName.isPresent()) {
+            throw new BadRequestException("employeeWorkInfo.name.already.exists: " + employeeWorkInfoRepository.searchWithNativeQuery(requestName).toString());
+        } else {
+            EmployeeWorkInfo employee = new EmployeeWorkInfo();
+            employee.setEmployeeName(createEmployeeWorkInfoRequest.getName());
+            employee.setEmployeeFunction(createEmployeeWorkInfoRequest.getFunction());
+            employee.setEmployeeDepart(createEmployeeWorkInfoRequest.getDepart());
+            return employeeWorkInfoRepository.save(employee);
+        }
     }
 
     public EmployeeWorkInfo updateEmployeeWorkInfo(EmployeeWorkInfoUpdateRequest updateEmployeeWorkInfoRequest) {
