@@ -1,6 +1,6 @@
 package wsLearning.model.Requests;
 
-public class EmployeeWorkInfoCreateRequest {
+public class EmployeeWorkInfoUpdateRequest {
 
     private int employeeId;
 

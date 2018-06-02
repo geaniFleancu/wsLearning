@@ -6,6 +6,7 @@ import org.springframework.util.StringUtils;
 import wsLearning.exception.BadRequestException;
 import wsLearning.model.EmployeeInfo;
 import wsLearning.model.Requests.EmployeeInfoCreateRequest;
+import wsLearning.model.Requests.EmployeeInfoUpdateRequest;
 import wsLearning.repository.EmployeeInfoRepository;
 
 import javax.transaction.Transactional;
@@ -36,6 +37,19 @@ public class EmployeeService {
         return employeeInfoRepository.save(employee);
     }
 
+    public EmployeeInfo updateEmployee(EmployeeInfoUpdateRequest updateEmployeeRequest) {
+        Optional<EmployeeInfo> employeeId = getEmployee(updateEmployeeRequest.getId());
+        if (!employeeId.isPresent()) {
+            throw new BadRequestException("employee.not.found");
+        }
+        EmployeeInfo employee = new EmployeeInfo();
+        employee.setId(updateEmployeeRequest.getId());
+        employee.setEmployeeName(updateEmployeeRequest.getName());
+        employee.setEmployeeEmail(updateEmployeeRequest.getEmail());
+        employee.setEmployeeAge(updateEmployeeRequest.getAge());
+        return employeeInfoRepository.save(employee);
+    }
+
 
     public void deleteEmployee(Integer employeeId) {
         Optional<EmployeeInfo> employee = getEmployee(employeeId);
@@ -49,12 +63,10 @@ public class EmployeeService {
         if (!StringUtils.isEmpty(employeeName) && !StringUtils.isEmpty(employeeEmail)) {
             return employeeInfoRepository.findByEmployeeNameAndEmployeeEmail(employeeName, employeeEmail);
         } else if (!StringUtils.isEmpty(employeeName)) {
-            return employeeInfoRepository.findByEmployeeName(employeeName);
+            return employeeInfoRepository.searchWithNativeQuery(employeeName);
         } else if (!StringUtils.isEmpty(employeeEmail)) {
             return employeeInfoRepository.findByEmployeeEmail(employeeEmail);
         }
         return Collections.emptyList();
     }
-
-
 }

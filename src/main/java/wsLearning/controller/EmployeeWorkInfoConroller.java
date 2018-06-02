@@ -7,6 +7,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import wsLearning.model.EmployeeWorkInfo;
 import wsLearning.model.Requests.EmployeeWorkInfoCreateRequest;
+import wsLearning.model.Requests.EmployeeWorkInfoUpdateRequest;
 import wsLearning.model.Requests.ErrorResponseEntity;
 import wsLearning.service.EmployeeWorkInfoService;
 
@@ -57,5 +58,10 @@ public class EmployeeWorkInfoConroller {
     @DeleteMapping(value = "/deleteEmployeeWorkInfo/{employeeId}")
     public void deleteEmployeeWorkInfo(@PathVariable(name = "employeeId") Integer employeeId) {
         employeeWorkInfoService.deleteEmployeeWorkInfo(employeeId);
+    }
+
+    @PutMapping(value = "/updateEmployeeWorkInfo")
+    public EmployeeWorkInfo updateEmployeeWorkInfo(@RequestBody EmployeeWorkInfoUpdateRequest updateEmployeeWorkInfoRequest) {
+        return employeeWorkInfoService.updateEmployeeWorkInfo(updateEmployeeWorkInfoRequest);
     }
 }

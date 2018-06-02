@@ -2,10 +2,12 @@ package wsLearning.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import wsLearning.model.EmployeeInfo;
 import wsLearning.model.Requests.EmployeeInfoCreateRequest;
+import wsLearning.model.Requests.EmployeeInfoUpdateRequest;
 import wsLearning.model.Requests.ErrorResponseEntity;
 import wsLearning.service.EmployeeService;
 
@@ -54,5 +56,10 @@ public class EmployeeInfoController {
     @DeleteMapping(value = "/deleteEmployee/{employeeId}")
     public void deleteEmployee(@PathVariable(name = "employeeId") Integer employeeId) {
         employeeService.deleteEmployee(employeeId);
+    }
+
+    @PutMapping(value = "/updateEmployee")
+    public EmployeeInfo updateEmployee(@RequestBody EmployeeInfoUpdateRequest updateEmployeeRequest) {
+        return employeeService.updateEmployee(updateEmployeeRequest);
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.util.StringUtils;
 import wsLearning.exception.BadRequestException;
 import wsLearning.model.EmployeeWorkInfo;
 import wsLearning.model.Requests.EmployeeWorkInfoCreateRequest;
+import wsLearning.model.Requests.EmployeeWorkInfoUpdateRequest;
 import wsLearning.repository.EmployeeWorkInfoRepository;
 
 import javax.transaction.Transactional;
@@ -33,6 +34,19 @@ public class EmployeeWorkInfoService {
         employee.setEmployeeName(createEmployeeWorkInfoRequest.getName());
         employee.setEmployeeFunction(createEmployeeWorkInfoRequest.getFunction());
         employee.setEmployeeDepart(createEmployeeWorkInfoRequest.getDepart());
+        return employeeWorkInfoRepository.save(employee);
+    }
+
+    public EmployeeWorkInfo updateEmployeeWorkInfo(EmployeeWorkInfoUpdateRequest updateEmployeeWorkInfoRequest) {
+        Optional<EmployeeWorkInfo> employeeId = getEmployeeWorkInfo(updateEmployeeWorkInfoRequest.getId());
+        if (!employeeId.isPresent()) {
+            throw new BadRequestException("employeeWorkInfo.not.found");
+        }
+        EmployeeWorkInfo employee = new EmployeeWorkInfo();
+        employee.setId(updateEmployeeWorkInfoRequest.getId());
+        employee.setEmployeeName(updateEmployeeWorkInfoRequest.getName());
+        employee.setEmployeeDepart(updateEmployeeWorkInfoRequest.getDepart());
+        employee.setEmployeeFunction(updateEmployeeWorkInfoRequest.getFunction());
         return employeeWorkInfoRepository.save(employee);
     }
 
