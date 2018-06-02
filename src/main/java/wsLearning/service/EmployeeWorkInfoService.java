@@ -38,6 +38,8 @@ public class EmployeeWorkInfoService {
             throw new BadRequestException("employeeWorkInfo.name.already.exists: " + employeeWorkInfoRepository.searchWithNativeQuery(createEmployeeWorkInfoRequest.getName()).toString());
         } else {
             EmployeeWorkInfo employee = new EmployeeWorkInfo();
+
+            employee.setId(createEmployeeWorkInfoRequest.getId());
             employee.setEmployeeName(createEmployeeWorkInfoRequest.getName());
             employee.setEmployeeFunction(createEmployeeWorkInfoRequest.getFunction());
             employee.setEmployeeDepart(createEmployeeWorkInfoRequest.getDepart());

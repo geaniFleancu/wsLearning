@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-
 public interface EmployeeWorkInfoRepository extends CrudRepository<EmployeeWorkInfo, Long> {
 
     @Query(value = "SELECT * FROM employeeportal.employeeworkinfo WHERE employeeName LIKE %:searchTerm%",

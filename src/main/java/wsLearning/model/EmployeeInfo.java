@@ -1,5 +1,7 @@
 package wsLearning.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity // This tells Hibernate to make a table out of this class
@@ -7,11 +9,13 @@ import javax.persistence.*;
 public class EmployeeInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "id")
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(name = "UseExistingIdOtherwiseGenerateUsingIdentity", strategy = "wsLearning.model.UseExistingIdOtherwiseGenerateUsingIdentity")
+    @GeneratedValue(generator = "UseExistingIdOtherwiseGenerateUsingIdentity")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "employeeName")
     private String employeeName;
     @Column(name = "age")
     private Integer employeeAge;
@@ -54,7 +58,7 @@ public class EmployeeInfo {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Employee info{" +
                 "id=" + id +
                 ", employeeName='" + employeeName + '\'' +
                 ", employeeEmail='" + employeeEmail + '\'' +

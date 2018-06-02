@@ -2,7 +2,7 @@ package wsLearning.model.Requests;
 
 public class EmployeeWorkInfoCreateRequest {
 
-    private int employeeId;
+    private Integer employeeId;
 
     private String employeeName;
 
@@ -10,11 +10,11 @@ public class EmployeeWorkInfoCreateRequest {
 
     private String employeeFunction;
 
-    public int getId() {
+    public Integer getId() {
         return employeeId;
     }
 
-    public void setId(int employeeId) {
+    public void setId(Integer employeeId) {
         this.employeeId = employeeId;
     }
 
